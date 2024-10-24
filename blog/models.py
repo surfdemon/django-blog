@@ -1,3 +1,22 @@
 from django.db import models
+from django.contrib.auth.models import User
+
+STATUS = ((0, 'Draft'), (1, "Published"))
 
 # Create your models here.
+class Post(models.Model):
+    # Title field max length 200 charaters and unique 
+    title = models.CharField(max_length=200, unique=True)
+    # Slug field max length 200 charaters and unique 
+    slug = models.SlugField(max_length=200, unique=True)
+    # Author field is a forgeign key on User. on delete of author all their posts are deleted as well
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog_posts")
+    # Content text field 
+    content = models.TextField()
+    # Created on is date time field that is auto populated by time that the post entry is created
+    created_on = models.DateTimeField(auto_now_add=True)
+    # Status is default to 0 and can be 0 (draft) or 1 (published) based on the tuple that is assigned to the constant STATUS
+    status = models.IntegerField(choices=STATUS, default=0)
+
+
+
