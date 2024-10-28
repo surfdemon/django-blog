@@ -17,6 +17,20 @@ class Post(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     # Status is default to 0 and can be 0 (draft) or 1 (published) based on the tuple that is assigned to the constant STATUS
     status = models.IntegerField(choices=STATUS, default=0)
+    excerpt = models.TextField(blank=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
+class Comment(models.Model):
+    # Post forgiegn Key 
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
+    # Author foreign Key 
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="commenter")
+    # comment text field 
+    comment = models.TextField()
+    # Approved bool 
+    approved = models.BooleanField(default=False)
+    # Created on date and time field that is auto populated with the current time and date
+    created_on = models.DateTimeField(auto_now_add=True)
 
 
 
