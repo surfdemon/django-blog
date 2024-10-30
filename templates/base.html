@@ -1,5 +1,6 @@
 {% load static %}
 {% url 'home' as home_url %}
+{% url 'about' as about_url %}
 
 <!DOCTYPE html>
 <html class="h-100" lang="en">
@@ -21,7 +22,7 @@
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     
     <!-- Custom CSS -->
-     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
     <!-- Javascript -->
      <script src="{% static 'js/script.js' %}"></script>
@@ -44,7 +45,9 @@
                         <a class="nav-link {% if request.path == home_url %}active{% endif %}" aria-current="page"
                             href="{% url 'home' %}">Home</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a href="{% url 'about' %}" class="nav-link {% if request.path == about_url %}active{% endif %}" aria-current="page">About</a>
+                    </li>
                 </ul>
                 <span class="navbar-text text-muted">
                     adventures of a software developer
