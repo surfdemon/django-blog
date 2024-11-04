@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
+
 
 STATUS = ((0, 'Draft'), (1, "Published"))
 
@@ -11,6 +13,9 @@ class Post(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     # Author field is a forgeign key on User. on delete of author all their posts are deleted as well
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog_posts")
+    # featured image using cloudinary
+    featured_image = CloudinaryField('image', default='placeholder')
+
     # Content text field 
     content = models.TextField()
     # Created on is date time field that is auto populated by time that the post entry is created
